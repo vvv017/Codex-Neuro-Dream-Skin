@@ -1,0 +1,6 @@
+*.log
+*.tmp
+*.bak
+dream-skin-check.png
+release/
+runtime/
