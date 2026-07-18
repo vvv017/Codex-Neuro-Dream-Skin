@@ -1,7 +1,7 @@
 # Codex Neuro Dream Skin
 
 <p align="center">
-  <a href="./README.en.md">English</a>
+  <strong>中文</strong> · <a href="#english">English</a>
 </p>
 
 Windows 版 Codex 桌面端的非官方 Neuro / Evil Neuro 深色像素主題。它使用本機回環 CDP 注入樣式，不修改官方 Codex 安裝包、`app.asar` 或 WindowsApps 內容。
@@ -79,3 +79,79 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\scripts\restore-d
 - MIT License 僅涵蓋軟體程式碼；Neuro / Evil Neuro 角色形象與圖片不包含在 MIT 授權內，公開或商業再散布前請自行確認相關權利。
 
 詳細聲明見 [NOTICE.md](./NOTICE.md)。
+
+---
+
+## English
+
+An unofficial dark pixel-art Neuro / Evil Neuro theme for the Windows Codex desktop app. It injects styles through a loopback-only CDP session without modifying the official Codex package, `app.asar`, or WindowsApps files.
+
+Based on [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin).
+
+### Features
+
+- Separate artwork for Home, tasks, Pull Requests, Sites, Scheduled, and Plugins
+- Neuro / Evil Neuro pixel art, CRT surfaces, and recognizable themed icons
+- Native Codex controls remain interactive
+- Re-applicable and reversible
+
+### Requirements
+
+- Windows 10 or 11
+- Official Codex desktop app installed from Microsoft Store
+- Node.js 22 or newer
+- Windows PowerShell 5.1 or newer
+
+### Install
+
+Close Codex completely, then run this from the repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\scripts\install-dream-skin.ps1"
+```
+
+Launch the `Codex Dream Skin` desktop shortcut. You can also run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\scripts\start-dream-skin.ps1" -PromptRestart
+```
+
+If a Codex update removes the theme, close Codex and run the installer again.
+
+### Verify
+
+After launch, capture a verification screenshot:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\scripts\verify-dream-skin.ps1" -ScreenshotPath "$PWD\dream-skin-check.png"
+```
+
+Developer checks:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\tests\run-tests.ps1"
+node --check ".\windows\scripts\injector.mjs"
+node --check ".\windows\assets\renderer-inject.js"
+```
+
+### Restore
+
+Normal restore:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\scripts\restore-dream-skin.ps1" -PromptRestart
+```
+
+Restore the saved appearance settings and remove shortcuts:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\windows\scripts\restore-dream-skin.ps1" -RestoreBaseTheme -Uninstall -PromptRestart
+```
+
+### Security and rights
+
+- CDP is bound to `127.0.0.1`, but other processes running as the same Windows user may still connect. Run only trusted local software while the theme is active.
+- This is not an official OpenAI product and is not affiliated with, endorsed by, or sponsored by OpenAI or the Neuro-sama team.
+- The MIT License covers software code only. Neuro / Evil Neuro character imagery and artwork are not included in the MIT grant; verify the relevant rights before public or commercial redistribution.
+
+See [NOTICE.md](./NOTICE.md) for details.
