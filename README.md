@@ -12,6 +12,23 @@ Windows 版 Codex 桌面端的非官方 Neuro / Evil Neuro 深色像素主題。
   <img src="windows/assets/neuro-home.png" alt="Neuro and Evil Neuro home background" width="900">
 </p>
 
+## 效果展示 / Showcase
+
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="New Task home screen" width="900"><br>
+  <sub>新任务主页 / New Task home</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/conversation.png" alt="Task conversation screen" width="900"><br>
+  <sub>任务会话 / Task conversation</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/scheduled.png" alt="Scheduled tasks screen" width="900"><br>
+  <sub>已排程任务 / Scheduled tasks</sub>
+</p>
+
 ## 特色
 
 - 首頁、任務、Pull Requests、網站、排程與外掛頁面各有獨立背景
