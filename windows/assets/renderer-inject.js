@@ -143,7 +143,7 @@
         : target === "reasoning" || button.hasAttribute("data-codex-intelligence-trigger") ? "model"
         : /^(聽寫|dictate)$/.test(label) ? "dictate"
         : /^(停止|stop)$/.test(label) ? "stop"
-        : /^(傳送|送出|send)/.test(label) || button.classList.contains("bg-token-foreground") ? "send"
+        : /^(傳送|送出|send)/.test(label) ? "send"
         : "";
       if (control) {
         if (button.dataset.dreamComposerControl !== control) button.dataset.dreamComposerControl = control;

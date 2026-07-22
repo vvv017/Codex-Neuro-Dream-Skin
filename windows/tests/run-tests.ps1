@@ -326,6 +326,10 @@ try {
   }
 
   $node = Get-DreamSkinNodeRuntime
+  $rendererSource = [System.IO.File]::ReadAllText((Join-Path $Root 'assets\renderer-inject.js'))
+  if ($rendererSource.Contains('button.classList.contains("bg-token-foreground")')) {
+    throw 'Composer controls must not be classified by a generic foreground style.'
+  }
   & $node.Path (Join-Path $Root 'scripts\injector.mjs') --self-test *> $null
   if ($LASTEXITCODE -ne 0) { throw 'Injector CDP self-test failed.' }
   & $node.Path (Join-Path $Root 'scripts\injector.mjs') --check-payload *> $null
