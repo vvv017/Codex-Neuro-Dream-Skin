@@ -327,8 +327,8 @@ try {
 
   $node = Get-DreamSkinNodeRuntime
   $rendererSource = [System.IO.File]::ReadAllText((Join-Path $Root 'assets\renderer-inject.js'))
-  if ($rendererSource.Contains('button.classList.contains("bg-token-foreground")')) {
-    throw 'Composer controls must not be classified by a generic foreground style.'
+  if ($rendererSource -notmatch 'button\.classList\.contains\("bg-token-foreground"\)\s*&&\s*button\.classList\.contains\("size-token-button-composer"\)') {
+    throw 'The disabled send fallback must require both foreground and composer-button size styles.'
   }
   & $node.Path (Join-Path $Root 'scripts\injector.mjs') --self-test *> $null
   if ($LASTEXITCODE -ne 0) { throw 'Injector CDP self-test failed.' }
