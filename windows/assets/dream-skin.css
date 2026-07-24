@@ -195,6 +195,39 @@ html.codex-dream-skin .dream-home [data-testid="home-icon"]::before {
   image-rendering: pixelated;
 }
 
+html.codex-dream-skin main.main-surface .openai-blossom-shimmer {
+  display: grid !important;
+  isolation: isolate;
+  place-items: center;
+  animation: dream-plasma-pulse 1.5s steps(4, end) infinite alternate;
+}
+
+html.codex-dream-skin main.main-surface .openai-blossom-shimmer > * {
+  display: none !important;
+}
+
+html.codex-dream-skin main.main-surface .openai-blossom-shimmer::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: center / contain no-repeat var(--dream-icon-loading);
+  image-rendering: pixelated;
+  animation: dream-plasma-flicker 1.15s steps(1, end) infinite;
+}
+
+html.codex-dream-skin main.main-surface .openai-blossom-shimmer::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  content: "";
+  background: #ffe3ff;
+  box-shadow: -22px -10px #ed4bad, 20px -15px #a978ff, 23px 9px #ff6da1, -18px 18px #8e6aff;
+  animation: dream-plasma-sparks 1.15s steps(1, end) infinite;
+  transform: translate(-50%, -50%) scale(.8);
+}
+
 html.codex-dream-skin .dream-home [class~="group/home-suggestions"] button {
   border: 1px solid rgba(207, 54, 93, .38) !important;
   border-left: 3px solid rgba(242, 85, 123, .82) !important;
@@ -838,6 +871,23 @@ html.codex-dream-skin :is([role="checkbox"], [role="radio"], [role="switch"]):is
   50% { opacity: 1; }
 }
 
+@keyframes dream-plasma-pulse {
+  from { filter: brightness(.94) drop-shadow(0 0 6px rgba(210, 50, 129, .48)); transform: scale(.97); }
+  to { filter: brightness(1.08) drop-shadow(0 0 13px rgba(177, 76, 255, .72)); transform: scale(1.03); }
+}
+
+@keyframes dream-plasma-flicker {
+  0%, 18%, 26%, 54%, 63%, 100% { filter: brightness(1); transform: translate(0, 0); }
+  19%, 25% { filter: brightness(1.45) saturate(1.35) hue-rotate(12deg); transform: translate(-1px, 0); }
+  55%, 62% { filter: brightness(1.32) saturate(1.25) hue-rotate(-14deg); transform: translate(1px, -1px); }
+}
+
+@keyframes dream-plasma-sparks {
+  0%, 18%, 26%, 54%, 63%, 100% { opacity: 0; transform: translate(-50%, -50%) rotate(0) scale(.8); }
+  19%, 25% { opacity: 1; transform: translate(-50%, -50%) rotate(12deg) scale(1); }
+  55%, 62% { opacity: .95; transform: translate(-50%, -50%) rotate(48deg) scale(.9); }
+}
+
 @keyframes dream-bow-pulse {
   from { opacity: .72; transform: scale(.92); }
   to { opacity: 1; transform: scale(1.08); }
@@ -881,7 +931,10 @@ html.codex-dream-skin ::selection {
   html.codex-dream-skin [data-dream-composer-control="stop"],
   html.codex-dream-skin [data-dream-status="running"] svg,
   html.codex-dream-skin [data-dream-progress="running"] span.text-size-chat::before,
-  html.codex-dream-skin [data-dream-activity="running"] .icon-xs {
+  html.codex-dream-skin [data-dream-activity="running"] .icon-xs,
+  html.codex-dream-skin main.main-surface .openai-blossom-shimmer,
+  html.codex-dream-skin main.main-surface .openai-blossom-shimmer::before,
+  html.codex-dream-skin main.main-surface .openai-blossom-shimmer::after {
     animation: none !important;
     transition: none !important;
   }

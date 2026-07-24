@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
-const SKIN_VERSION = "1.20.0";
+const SKIN_VERSION = "1.21.2";
 const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "[::1]", "::1"]);
 const BROWSER_ID_PATTERN = /^[A-Za-z0-9._-]{1,200}$/;
 
@@ -269,7 +269,7 @@ async function connectBrowserIdentityAnchor(port, expectedBrowserId) {
 async function loadPayload() {
   const [
     css, template, art, homeArt, pullRequestsArt, sitesArt, scheduledArt, pluginsArt,
-    newTaskIcon, pullRequestsIcon, sitesIcon, scheduledIcon, pluginsIcon, sendIcon, stopIcon,
+    newTaskIcon, pullRequestsIcon, sitesIcon, scheduledIcon, pluginsIcon, sendIcon, stopIcon, loadingIcon,
   ] = await Promise.all([
     fs.readFile(path.join(root, "assets", "dream-skin.css"), "utf8"),
     fs.readFile(path.join(root, "assets", "renderer-inject.js"), "utf8"),
@@ -286,6 +286,7 @@ async function loadPayload() {
     fs.readFile(path.join(root, "assets", "pixel-icons", "plugins.png")),
     fs.readFile(path.join(root, "assets", "pixel-icons", "send.png")),
     fs.readFile(path.join(root, "assets", "pixel-icons", "stop.png")),
+    fs.readFile(path.join(root, "assets", "pixel-icons", "loading-plasma-ball.png")),
   ]);
   const artDataUrl = `data:image/png;base64,${art.toString("base64")}`;
   const homeArtDataUrl = `data:image/png;base64,${homeArt.toString("base64")}`;
@@ -303,6 +304,7 @@ async function loadPayload() {
     plugins: pluginsIcon,
     send: sendIcon,
     stop: stopIcon,
+    loading: loadingIcon,
   }).map(([icon, image]) => [icon, `data:image/png;base64,${image.toString("base64")}`]));
   return template
     .replace("__DREAM_SKIN_VERSION_JSON__", JSON.stringify(SKIN_VERSION))
@@ -378,7 +380,7 @@ async function removeFromSession(session) {
     for (const page of ['pull-requests', 'sites', 'scheduled', 'plugins']) {
       document.documentElement?.style.removeProperty('--dream-page-' + page + '-art');
     }
-    for (const icon of ['new-task', 'pull-requests', 'sites', 'scheduled', 'plugins', 'send', 'stop']) {
+    for (const icon of ['new-task', 'pull-requests', 'sites', 'scheduled', 'plugins', 'send', 'stop', 'loading']) {
       document.documentElement?.style.removeProperty('--dream-icon-' + icon);
     }
     document.querySelectorAll('.dream-home').forEach((node) => node.classList.remove('dream-home'));
@@ -405,7 +407,7 @@ async function verifyRemovedSession(session) {
     !document.documentElement.hasAttribute('data-dream-page') &&
     !['pull-requests', 'sites', 'scheduled', 'plugins'].some((page) =>
       document.documentElement.style.getPropertyValue('--dream-page-' + page + '-art')) &&
-    !['new-task', 'pull-requests', 'sites', 'scheduled', 'plugins', 'send', 'stop'].some((icon) =>
+    !['new-task', 'pull-requests', 'sites', 'scheduled', 'plugins', 'send', 'stop', 'loading'].some((icon) =>
       document.documentElement.style.getPropertyValue('--dream-icon-' + icon)) &&
     !document.querySelector('[data-dream-nav], [data-dream-composer-control], [data-dream-field], [data-dream-notice], [data-dream-status], [data-dream-side-panel], [data-dream-progress], [data-dream-activity]') &&
     !document.querySelector('.dream-home') &&
@@ -433,7 +435,7 @@ async function verifySession(session) {
       };
     };
     const allowedPages = ['pull-requests', 'sites', 'scheduled', 'plugins'];
-    const iconNames = ['new-task', 'pull-requests', 'sites', 'scheduled', 'plugins', 'send', 'stop'];
+    const iconNames = ['new-task', 'pull-requests', 'sites', 'scheduled', 'plugins', 'send', 'stop', 'loading'];
     const home = document.querySelector('.dream-home');
     const page = document.documentElement.dataset.dreamPage || '';
     const mainSurface = document.querySelector('main.main-surface');

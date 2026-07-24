@@ -33,6 +33,7 @@ Windows 版 Codex 桌面端的非官方 Neuro / Evil Neuro 深色像素主題。
 
 - 首頁、任務、Pull Requests、網站、排程與外掛頁面各有獨立背景
 - Evil Neuro / Neuro 像素插畫、CRT 面板與高辨識度主題圖示
+- 對話載入標誌使用帶三層底座與兩段放電動畫的 Evil Neuro 像素閃電球
 - 保留原生 Codex 控件與互動
 - 可重複套用，也可一鍵還原
 
@@ -109,6 +110,7 @@ Based on [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Ski
 
 - Separate artwork for Home, tasks, Pull Requests, Sites, Scheduled, and Plugins
 - Neuro / Evil Neuro pixel art, CRT surfaces, and recognizable themed icons
+- The conversation loader uses an Evil Neuro pixel plasma ball with a three-tier base and two-stage discharge animation
 - Native Codex controls remain interactive
 - Re-applicable and reversible
 

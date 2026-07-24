@@ -330,6 +330,13 @@ try {
   if ($rendererSource -notmatch 'button\.classList\.contains\("bg-token-foreground"\)\s*&&\s*button\.classList\.contains\("size-token-button-composer"\)') {
     throw 'The disabled send fallback must require both foreground and composer-button size styles.'
   }
+  $cssSource = [System.IO.File]::ReadAllText((Join-Path $Root 'assets\dream-skin.css'))
+  if ($cssSource -notmatch 'main\.main-surface \.openai-blossom-shimmer' -or
+    $cssSource -notmatch 'var\(--dream-icon-loading\)' -or
+    $cssSource -notmatch '@keyframes dream-plasma-flicker' -or
+    $cssSource -notmatch '@keyframes dream-plasma-sparks') {
+    throw 'The conversation loader must use the themed loading icon.'
+  }
   & $node.Path (Join-Path $Root 'scripts\injector.mjs') --self-test *> $null
   if ($LASTEXITCODE -ne 0) { throw 'Injector CDP self-test failed.' }
   & $node.Path (Join-Path $Root 'scripts\injector.mjs') --check-payload *> $null
