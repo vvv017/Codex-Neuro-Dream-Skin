@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-neuro-evil-neuro",
+  "name": "Neuro & Evil Neuro",
+  "brandSubtitle": "NEURO DREAM SKIN",
+  "tagline": "Neuro and Evil Neuro are online.",
+  "projectPrefix": "Select project · ",
+  "projectLabel": "🎀  Select project",
+  "statusText": "SISTERS ONLINE",
+  "quote": "LET'S BUILD SOMETHING WONDERFUL",
+  "image": "task-background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.22,
+    "focusY": 0.52,
+    "safeArea": "right",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#090609",
+    "panel": "#130c11",
+    "panelAlt": "#26131c",
+    "accent": "#cf365d",
+    "accentAlt": "#f2557b",
+    "secondary": "#62d9ee",
+    "highlight": "#b783ff",
+    "text": "#eee4e8",
+    "muted": "#b49ca6",
+    "line": "rgba(207, 54, 93, 0.38)"
+  }
+}

@@ -6,6 +6,13 @@ Copyright (c) 2026 Codex Dream Skin Studio contributors.
 
 Codex Neuro Dream Skin is an unofficial customization project. It is not affiliated with, endorsed by, or sponsored by OpenAI or the Neuro-sama team.
 
+## Version provenance
+
+The Windows migration pins its Dream Skin core to upstream v1.4.0 at tag commit
+277b5202bedfda6ae771e2634c4c47877eb6cc87. The Neuro / Evil Neuro visual
+extension is version 1.21.2. Branch work is isolated and does not modify an
+existing stable installation or the official Codex package.
+
 ## Software license
 
 The MIT License in `LICENSE` applies to the software source code in this repository, including scripts, CSS, injectors, tests, and software documentation.
