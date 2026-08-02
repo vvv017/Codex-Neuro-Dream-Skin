@@ -195,18 +195,18 @@ html.codex-dream-skin .dream-home [data-testid="home-icon"]::before {
   image-rendering: pixelated;
 }
 
-html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer {
+html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"])) {
   display: grid !important;
   isolation: isolate;
   place-items: center;
   animation: dream-plasma-pulse 1.5s steps(4, end) infinite alternate;
 }
 
-html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer > * {
+html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"])) > * {
   display: none !important;
 }
 
-html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer::before {
+html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"]))::before {
   position: absolute;
   inset: 0;
   content: "";
@@ -215,7 +215,7 @@ html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer::before {
   animation: dream-plasma-flicker 1.15s steps(1, end) infinite;
 }
 
-html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer::after {
+html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"]))::after {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -936,9 +936,9 @@ html.codex-dream-skin ::selection {
   html.codex-dream-skin [data-dream-status="running"] svg,
   html.codex-dream-skin [data-dream-progress="running"] span.text-size-chat::before,
   html.codex-dream-skin [data-dream-activity="running"] .icon-xs,
-  html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer,
-  html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer::before,
-  html.codex-dream-skin [data-ds-part="main"] .openai-blossom-shimmer::after {
+  html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"])),
+  html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"]))::before,
+  html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"]))::after {
     animation: none !important;
     transition: none !important;
   }

@@ -284,6 +284,9 @@ export async function runRendererRuntimeTest(assetRoot) {
   assert.match(neuroCss,
     /\[data-ds-part="header"\]::before,[\s\S]{0,180}\[data-ds-part="header"\]::after\s*\{\s*visibility:\s*hidden;/,
     "The Neuro theme must not float decorative brand text over the native header.");
+  assert.match(neuroCss,
+    /:is\(\.openai-blossom-shimmer,\s*\[aria-hidden="true"\]:has\(> svg \+ \[style\*="mask-image"\]\)\)::before\s*\{[^}]*var\(--dream-icon-loading\)/,
+    "The current CSS-module blossom loader must retain the Neuro plasma icon.");
   assert.match(css, /content:\s*var\(--dream-skin-name[\s\S]{0,180}var\(--dream-skin-brand-subtitle/);
   assert.match(css, /content:\s*var\(--dream-skin-status/);
   assert.match(css, /content:\s*var\(--dream-skin-quote/);
