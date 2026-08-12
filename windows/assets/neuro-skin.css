@@ -150,6 +150,10 @@ html.codex-dream-skin [data-ds-part="main"] > [data-ds-part="header"] {
   backdrop-filter: blur(14px) !important;
 }
 
+html.codex-dream-skin [data-ds-part="main"].dream-home-shell > [data-ds-part="header"] {
+  backdrop-filter: none !important;
+}
+
 html.codex-dream-skin [data-ds-part="main"] > [data-ds-part="header"]::before,
 html.codex-dream-skin [data-ds-part="main"] > [data-ds-part="header"]::after {
   visibility: hidden;
@@ -193,6 +197,32 @@ html.codex-dream-skin .dream-home [data-testid="home-icon"]::before {
   content: "";
   background: center / contain no-repeat var(--dream-icon-new-task);
   image-rendering: pixelated;
+}
+
+html.codex-dream-skin .dream-home [data-feature="game-source"]::before,
+html.codex-dream-skin .dream-home [data-feature="game-source"]::after,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"]::before,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.codex-dream-skin .dream-home [data-feature="game-source"] button,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"] button {
+  display: inline-block !important;
+  max-width: min(100%, 18rem) !important;
+  overflow: hidden !important;
+  font-size: .78em !important;
+  line-height: 1.25 !important;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap !important;
+}
+
+html.codex-dream-skin .dream-home [data-feature="game-source"] button::before,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"] button::before {
+  content: none !important;
+  display: none !important;
 }
 
 html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"])) {

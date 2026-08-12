@@ -236,6 +236,7 @@ export async function runRendererRuntimeTest(assetRoot) {
   const template = await fs.readFile(path.join(assetRoot, "renderer-inject.js"), "utf8");
   const css = await fs.readFile(path.join(assetRoot, "dream-skin.css"), "utf8");
   const neuroCss = await fs.readFile(path.join(assetRoot, "neuro-skin.css"), "utf8");
+  const neuroAddon = await fs.readFile(path.join(assetRoot, "neuro-addon.js"), "utf8");
   const selectorContract = JSON.parse(await fs.readFile(path.join(assetRoot, "selectors.json"), "utf8"));
   const embeddedContractMatch = template.match(/^  const SELECTOR_CONTRACT = (.+);$/m);
   assert.ok(embeddedContractMatch, "Renderer must embed the selector contract.");
@@ -284,6 +285,21 @@ export async function runRendererRuntimeTest(assetRoot) {
   assert.match(neuroCss,
     /\[data-ds-part="header"\]::before,[\s\S]{0,180}\[data-ds-part="header"\]::after\s*\{\s*visibility:\s*hidden;/,
     "The Neuro theme must not float decorative brand text over the native header.");
+  assert.match(neuroAddon,
+    /\[role="main"\]:has\(form\[data-composer-placement="home"\]\)/,
+    "The Neuro theme must recognize the ChatGPT new-conversation home route.");
+  assert.match(neuroCss,
+    /\[data-ds-part="main"\]\.dream-home-shell > \[data-ds-part="header"\]\s*\{\s*backdrop-filter:\s*none\s*!important;/,
+    "Home headers must not establish a containing block that displaces native fixed controls.");
+  assert.match(neuroCss,
+    /\[role="main"\]:has\(\[data-testid="home-icon"\]\) \[data-feature="game-source"\]::before,[\s\S]{0,180}\[role="main"\]:has\(\[data-testid="home-icon"\]\) \[data-feature="game-source"\]::after\s*\{\s*content:\s*none\s*!important;\s*display:\s*none\s*!important;/,
+    "The Neuro home hero must leave only the native Codex heading visible.");
+  assert.match(neuroCss,
+    /\[role="main"\]:has\(\[data-testid="home-icon"\]\) \[data-feature="game-source"\] button\s*\{[^}]*max-width:\s*min\(100%,\s*18rem\)[^}]*font-size:\s*\.78em[^}]*text-overflow:\s*ellipsis[^}]*white-space:\s*nowrap/s,
+    "Long project names must stay compact inside the native home heading.");
+  assert.match(neuroCss,
+    /\[role="main"\]:has\(\[data-testid="home-icon"\]\) \[data-feature="game-source"\] button::before\s*\{\s*content:\s*none\s*!important;\s*display:\s*none\s*!important;/,
+    "The native project title must not retain the Dream Skin project-prefix label.");
   assert.match(neuroCss,
     /:is\(\.openai-blossom-shimmer,\s*\[aria-hidden="true"\]:has\(> svg \+ \[style\*="mask-image"\]\)\)::before\s*\{[^}]*var\(--dream-icon-loading\)/,
     "The current CSS-module blossom loader must retain the Neuro plasma icon.");

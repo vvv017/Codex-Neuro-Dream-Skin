@@ -75,7 +75,11 @@
 
     const shellMain = document.querySelector('[data-ds-part="main"]') ||
       document.querySelector("main[data-app-shell-main-surface]");
-    const home = document.querySelector('[role="main"]:has([data-testid="home-icon"]), [role="main"]:has([class~="group/home-suggestions"])');
+    const home = document.querySelector(
+      '[role="main"]:has([data-testid="home-icon"]), ' +
+      '[role="main"]:has([class~="group/home-suggestions"]), ' +
+      '[role="main"]:has(form[data-composer-placement="home"])',
+    );
     for (const candidate of document.querySelectorAll('[role="main"].dream-home')) {
       if (candidate !== home) candidate.classList.remove("dream-home");
     }
