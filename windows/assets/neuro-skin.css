@@ -180,6 +180,19 @@ html.codex-dream-skin [role="main"].dream-home {
   image-rendering: pixelated;
 }
 
+html.codex-dream-skin [role="main"].dream-home
+  > div:first-child > div:first-child > div:first-child {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.codex-dream-skin [role="main"].dream-home
+  > div:first-child > div:first-child > div:first-child::before {
+  content: none !important;
+}
+
 html.codex-dream-skin .dream-home [data-testid="home-icon"] {
   display: grid;
   opacity: .92 !important;
@@ -470,10 +483,11 @@ html.codex-dream-skin .dream-thread-host {
   overflow: hidden;
 }
 
-#codex-dream-skin-backdrop {
+html.codex-dream-skin .dream-thread-host::before {
+  content: "";
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   background-color: #120b10;
   background-image:
@@ -486,8 +500,6 @@ html.codex-dream-skin .dream-thread-host {
 }
 
 html.codex-dream-skin .dream-thread-host > .thread-scroll-container {
-  position: relative !important;
-  z-index: 1;
   background: transparent !important;
 }
 
@@ -946,7 +958,7 @@ html.codex-dream-skin ::selection {
     background-position: center, 58% 38% !important;
   }
 
-  #codex-dream-skin-backdrop {
+  html.codex-dream-skin .dream-thread-host::before {
     background-position: center, center bottom;
   }
 

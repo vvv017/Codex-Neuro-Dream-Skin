@@ -775,13 +775,14 @@ async function probeSession(session) {
       sidebar: Boolean(document.querySelector(${selectorLiteral("left-panel")})),
       composer: Boolean(document.querySelector(${selectorLiteral("composer-chrome")})),
       main: Boolean(document.querySelector(${selectorLiteral("home-route")})),
+      thread: Boolean(document.querySelector(${selectorLiteral("thread-surface")})),
     };
     const settings = Boolean(document.querySelector(${selectorLiteral("appearance-radio")})) ||
       Boolean(document.querySelector(${stableTestidLiteral("theme-preview")}));
     return {
       markers,
       codex: location.protocol === 'app:' &&
-        ((markers.shell && markers.sidebar) || settings || markers.main),
+        (((markers.shell || markers.thread) && markers.sidebar) || settings || markers.main),
     };
   })()`);
 }
@@ -858,9 +859,10 @@ export function earlyPayloadFor(payload, revision) {
       const shell = document.querySelector(${selectorLiteral("shell-main")});
       const sidebar = document.querySelector(${selectorLiteral("left-panel")});
       const main = document.querySelector(${selectorLiteral("home-route")});
+      const thread = document.querySelector(${selectorLiteral("thread-surface")});
       const settings = document.querySelector(${selectorLiteral("appearance-radio")}) ||
         document.querySelector(${stableTestidLiteral("theme-preview")});
-      return Boolean((shell && sidebar) || settings || main);
+      return Boolean(((shell || thread) && sidebar) || settings || main);
     };
     const install = () => {
       if (window[generationKey] !== generation) { stop(); return true; }
@@ -1136,7 +1138,8 @@ async function verifySession(session, expectedThemeId = null, expectedRevision =
       const r = node.getBoundingClientRect();
       return { x: Math.round(r.x), y: Math.round(r.y), width: Math.round(r.width), height: Math.round(r.height) };
     };
-    const home = document.querySelector(${selectorLiteral("home-route")});
+    const home = [...document.querySelectorAll(${selectorLiteral("home-route")})]
+      .find((node) => node.checkVisibility()) ?? null;
     const suggestions = home?.querySelector(${selectorLiteral("home-suggestions")}) ?? null;
     const cards = suggestions ? [...suggestions.querySelectorAll('button')].map(box) : [];
     const runtime = window.__CODEX_DREAM_SKIN_STATE__;
