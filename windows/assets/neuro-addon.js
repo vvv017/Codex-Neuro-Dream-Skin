@@ -55,27 +55,28 @@
       root.style.setProperty(`--dream-icon-${icon}`, `url("${url}")`);
     }
 
-    const thread = document.querySelector(".thread-scroll-container");
-    const threadHost = thread?.parentElement ?? null;
+    // Retained tabs need their own background, including while hidden.
+    const threadHosts = new Set(
+      [...document.querySelectorAll(".thread-scroll-container")]
+        .map((thread) => thread.parentElement)
+        .filter(Boolean),
+    );
     for (const candidate of document.querySelectorAll(".dream-thread-host")) {
-      if (candidate !== threadHost) candidate.classList.remove("dream-thread-host");
-    }
-    let backdrop = document.getElementById(BACKDROP_ID);
-    if (threadHost) {
-      threadHost.classList.add("dream-thread-host");
-      if (!backdrop) {
-        backdrop = document.createElement("div");
-        backdrop.id = BACKDROP_ID;
-        backdrop.setAttribute("aria-hidden", "true");
+      if (!threadHosts.has(candidate)) {
+        candidate.classList.remove("dream-thread-host");
       }
-      if (backdrop.parentElement !== threadHost) threadHost.prepend(backdrop);
-    } else {
-      backdrop?.remove();
+    }
+    for (const threadHost of threadHosts) {
+      threadHost.classList.add("dream-thread-host");
     }
 
     const shellMain = document.querySelector('[data-ds-part="main"]') ||
       document.querySelector("main[data-app-shell-main-surface]");
-    const home = document.querySelector('[role="main"]:has([data-testid="home-icon"]), [role="main"]:has([class~="group/home-suggestions"])');
+    const home = document.querySelector(
+      '[role="main"]:has([data-testid="home-icon"]), ' +
+      '[role="main"]:has([class~="group/home-suggestions"]), ' +
+      '[role="main"]:has(form[data-composer-placement="home"])',
+    );
     for (const candidate of document.querySelectorAll('[role="main"].dream-home')) {
       if (candidate !== home) candidate.classList.remove("dream-home");
     }

@@ -150,6 +150,10 @@ html.codex-dream-skin [data-ds-part="main"] > [data-ds-part="header"] {
   backdrop-filter: blur(14px) !important;
 }
 
+html.codex-dream-skin [data-ds-part="main"].dream-home-shell > [data-ds-part="header"] {
+  backdrop-filter: none !important;
+}
+
 html.codex-dream-skin [data-ds-part="main"] > [data-ds-part="header"]::before,
 html.codex-dream-skin [data-ds-part="main"] > [data-ds-part="header"]::after {
   visibility: hidden;
@@ -176,6 +180,19 @@ html.codex-dream-skin [role="main"].dream-home {
   image-rendering: pixelated;
 }
 
+html.codex-dream-skin [role="main"].dream-home
+  > div:first-child > div:first-child > div:first-child {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.codex-dream-skin [role="main"].dream-home
+  > div:first-child > div:first-child > div:first-child::before {
+  content: none !important;
+}
+
 html.codex-dream-skin .dream-home [data-testid="home-icon"] {
   display: grid;
   opacity: .92 !important;
@@ -193,6 +210,32 @@ html.codex-dream-skin .dream-home [data-testid="home-icon"]::before {
   content: "";
   background: center / contain no-repeat var(--dream-icon-new-task);
   image-rendering: pixelated;
+}
+
+html.codex-dream-skin .dream-home [data-feature="game-source"]::before,
+html.codex-dream-skin .dream-home [data-feature="game-source"]::after,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"]::before,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.codex-dream-skin .dream-home [data-feature="game-source"] button,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"] button {
+  display: inline-block !important;
+  max-width: min(100%, 18rem) !important;
+  overflow: hidden !important;
+  font-size: .78em !important;
+  line-height: 1.25 !important;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap !important;
+}
+
+html.codex-dream-skin .dream-home [data-feature="game-source"] button::before,
+html.codex-dream-skin [role="main"]:has([data-testid="home-icon"]) [data-feature="game-source"] button::before {
+  content: none !important;
+  display: none !important;
 }
 
 html.codex-dream-skin [data-ds-part="main"] :is(.openai-blossom-shimmer, [aria-hidden="true"]:has(> svg + [style*="mask-image"])) {
@@ -440,10 +483,11 @@ html.codex-dream-skin .dream-thread-host {
   overflow: hidden;
 }
 
-#codex-dream-skin-backdrop {
+html.codex-dream-skin .dream-thread-host::before {
+  content: "";
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   background-color: #120b10;
   background-image:
@@ -456,8 +500,6 @@ html.codex-dream-skin .dream-thread-host {
 }
 
 html.codex-dream-skin .dream-thread-host > .thread-scroll-container {
-  position: relative !important;
-  z-index: 1;
   background: transparent !important;
 }
 
@@ -916,7 +958,7 @@ html.codex-dream-skin ::selection {
     background-position: center, 58% 38% !important;
   }
 
-  #codex-dream-skin-backdrop {
+  html.codex-dream-skin .dream-thread-host::before {
     background-position: center, center bottom;
   }
 
